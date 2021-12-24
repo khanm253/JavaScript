@@ -1,0 +1,30 @@
+.top-box, .output-box{
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    flex-direction: column;
+}
+
+.main {
+    width: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.bottom-box{
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.bottom-box div{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
