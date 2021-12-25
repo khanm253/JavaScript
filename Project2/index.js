@@ -14,6 +14,10 @@ function rpsGame(yourChoice){
     }else{
         output = 'You Lost :( The computer chose: ' + choices[botChoice];
     }
+
+    text = document.createTextNode(output)
+    document.getElementById('output').textContent = '';
+    document.getElementById('output').appendChild(text)
 }
 
 function decideWinner(human, bot){
