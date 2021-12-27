@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState, useEffect} from 'react'
 import './EmailList.css';
 import {Checkbox, IconButton} from '@mui/material';
 import RedoIcon from '@mui/icons-material/Redo';
@@ -11,12 +11,26 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import InboxIcon from '@mui/icons-material/Inbox';
 import PeopleIcon from '@mui/icons-material/People';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
+import { db , addDoc, collection, serverTimestamp , getDocs, orderBy} from './firebase';
 
 import Section from './Section';
 import EmailRow from './EmailRow';
 
 function EmailList() {
     const [emails, setemails] = useState([])
+
+    useEffect(() => {
+        const getEmails = async () => {
+            const data = await getDocs(collection(db, "emails"), orderBy("time", "desc"));
+            setemails(data.docs.map((doc) => ({
+                ...doc.data(), 
+                id: doc.id
+            })))
+        } 
+        
+        getEmails();
+        
+    }, [emails])
 
     return (
         <div className='emailList'>
@@ -57,6 +71,15 @@ function EmailList() {
             </div>
 
             <div className='emailRows'> 
+                {emails.map((email) => (
+                    <EmailRow
+                        title = {email.to} 
+                        subject={email.subject}
+                        desc = {email.msg}
+                        time = {new Date(email.time?.seconds * 1000).toUTCString()}
+                    />
+                ))}
+                
                 <EmailRow 
                     title="Twitch"
                     subject="Hello fellow streamers !!!"
