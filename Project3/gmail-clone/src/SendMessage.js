@@ -4,7 +4,10 @@ import CloseIcon from '@mui/icons-material/Close';
 import {Button} from '@mui/material';
 import {useForm} from "react-hook-form"
 import {useDispatch} from "react-redux"
-import {closeSendMessage} from './features/mailSlice'
+import {closeSendMessage} from './features/mailSlice';
+import { db , addDoc, collection, serverTimestamp} from './firebase';
+
+
 
 function showError(name){
     return (
@@ -17,6 +20,15 @@ function SendMessage() {
     
     const onSubmit = (formData) => {
         console.log(formData);
+
+        const docRef = addDoc(collection(db, "emails"), {
+            to: formData.to,
+            subject: formData.subject,
+            msg: formData.msg,
+            time: serverTimestamp()
+        });
+
+        dispatch(closeSendMessage());
     }
 
     return (

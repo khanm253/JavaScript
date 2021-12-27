@@ -16,6 +16,8 @@ import Section from './Section';
 import EmailRow from './EmailRow';
 
 function EmailList() {
+    const [emails, setemails] = useState([])
+
     return (
         <div className='emailList'>
             
