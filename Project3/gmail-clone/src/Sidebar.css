@@ -14,3 +14,9 @@
     display: flex;
     justify-content: center;
 }
+
+.sidebar{
+    flex: 0.2;
+    max-width: 300px;
+    padding-right: 20px;
+}
