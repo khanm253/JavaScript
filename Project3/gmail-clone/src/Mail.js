@@ -9,9 +9,12 @@ import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import PrintOutlinedIcon from '@mui/icons-material/PrintOutlined';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import LabelImportantIcon from '@mui/icons-material/LabelImportant';
+import { selectOpenMail } from './features/mailSlice';
+import {useSelector} from "react-redux"
 
 function Mail() {
     const nav = useNavigate();
+    const selectedMail = useSelector(selectOpenMail);
 
     return (
         <div className='mail'>
@@ -44,14 +47,14 @@ function Mail() {
 
             <div className='mail__body'>
                 <div className='mail__bodyHeader'>
-                    <h2>Subject</h2>
+                    <h2>{selectedMail?.subject}</h2>
                     <LabelImportantIcon className='label'/>
-                    <p>Title</p>
-                    <p className='mail__time'>10pm</p>
+                    <p>{selectedMail?.title}</p>
+                    <p className='mail__time'>{selectedMail?.time}</p>
                 </div>
 
                 <div className='message'>
-                    <p>This is the message</p></div>
+                    <p>{selectedMail?.desc}</p></div>
             </div>
         </div>
     )
