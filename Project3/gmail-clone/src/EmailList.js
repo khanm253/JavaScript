@@ -30,7 +30,7 @@ function EmailList() {
         
         getEmails();
         
-    }, [emails])
+    }, [])
 
     return (
         <div className='emailList'>
