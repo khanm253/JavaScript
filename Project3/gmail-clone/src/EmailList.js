@@ -10,18 +10,21 @@ import KeyboardHideIcon from '@mui/icons-material/KeyboardHide';
 import SettingsIcon from '@mui/icons-material/Settings';
 import InboxIcon from '@mui/icons-material/Inbox';
 import PeopleIcon from '@mui/icons-material/People';
-import LocalOfferIcon from '@mui/icons-material/LocalOffer';
-import { db , addDoc, collection, serverTimestamp , getDocs, orderBy} from './firebase';
-
+import { db , collection, getDocs, where} from './firebase';
+import {useSelector} from "react-redux"
 import Section from './Section';
 import EmailRow from './EmailRow';
+import {selectUser} from './features/userSlice';
+import { query } from '@firebase/firestore';
 
 function EmailList() {
     const [emails, setemails] = useState([])
+    const user = useSelector(selectUser)
 
     useEffect(() => {
         const getEmails = async () => {
-            const data = await getDocs(collection(db, "emails"), orderBy("time", "desc"));
+            const q = query(collection(db, "emails"),where("to", "==", user.email))
+            const data = await getDocs(q);
             setemails(data.docs.map((doc) => ({
                 ...doc.data(), 
                 id: doc.id
@@ -29,6 +32,7 @@ function EmailList() {
         } 
         
         getEmails();
+        
         
     }, [])
 
@@ -79,25 +83,6 @@ function EmailList() {
                         time = {new Date(email.time?.seconds * 1000).toUTCString()}
                     />
                 ))}
-                
-                <EmailRow 
-                    title="Twitch"
-                    subject="Hello fellow streamers !!!"
-                    desc = "This is a test Row"
-                    time = "10pm"
-                />
-                <EmailRow 
-                    title="Twitch"
-                    subject="Hello fellow streamers !!!"
-                    desc = "This is a test Row"
-                    time = "10pm"
-                />
-                <EmailRow 
-                    title="Twitch"
-                    subject="Hello fellow streamers !!!"
-                    desc = "This is a test Row"
-                    time = "10pm"
-                />
             </div>
         </div>
     )

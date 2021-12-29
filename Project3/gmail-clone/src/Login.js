@@ -11,7 +11,6 @@ function Login() {
         signInWithPopup(auth, provider)
         .then((result) => {
             const user = result.user
-            console.log(user)
             dispatch(login({
                 displayName: user.displayName,
                 email: user.email,
