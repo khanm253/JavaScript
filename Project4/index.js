@@ -19,7 +19,6 @@ document.addEventListener("keyup", pressOff);
 function moveLines(){
     let lines = document.querySelectorAll(".line");
     lines.forEach(function(item){
-        console.log(item.y)
         if(item.y >= 1500){
             item.y -= 1500;
         }
@@ -29,10 +28,12 @@ function moveLines(){
     })
 }
 
-function moveEnemy(){
+function moveEnemy(car){
     let ele = document.querySelectorAll(".enemy");
     ele.forEach(function(item){
-        console.log(item.y)
+        if(isCollide(car,item)){
+            console.log("HIT")
+        }
         if(item.y >= 1500){
             item.y = -600;
             item.style.left = Math.floor(Math.random() * 150) + "px";
@@ -43,12 +44,23 @@ function moveEnemy(){
     })
 }
 
+function isCollide(a,b){
+    let aRect = a.getBoundingClientRect();
+    let bRect = b.getBoundingClientRect();
+
+    return !(
+        (aRect.bottom < bRect.top) ||
+        (aRect.top > bRect.bottom) ||
+        (aRect.right < bRect.left) ||
+        (aRect.left > bRect.right)
+    )
+}
+
 function playGame(){
-    console.log("inPlay");
     let car = document.querySelector(".car");
     let road = gameArea.getBoundingClientRect();
     moveLines();
-    moveEnemy();
+    moveEnemy(car);
     if(player.start){
 
         if(keys.ArrowUp && player.y > road.top){
@@ -105,11 +117,9 @@ function start(){
 function pressOn(e){
     e.preventDefault();
     keys[e.key] = true; 
-    console.log(keys)
 }
 
 function pressOff(e){
     e.preventDefault();
     keys[e.key] = false; 
-    console.log(keys)
 }
