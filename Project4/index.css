@@ -14,7 +14,10 @@
     margin: auto;
     width: 50px;
     height: 100px;
-    background-color: blue;
+    background-image: url("https://e7.pngegg.com/pngimages/40/7/png-clipart-white-audi-sedan-top-angle-3d-car-simulator-driving-simulator-simulation-2d-furniture-top-view-driving-vehicle.png");
+    background-position: center;
+    background-size: cover;
+    background-color: blue !important;
 }
 
 .gameArea{

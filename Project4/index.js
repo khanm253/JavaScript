@@ -39,6 +39,9 @@ function moveEnemy(car){
         if(item.y >= 1500){
             item.y = -600;
             item.style.left = Math.floor(Math.random() * 150) + "px";
+            let colors = ["red", "green", "yellow", "purple", "grey"]
+            let randomChoice = Math.floor(Math.random() * (colors.length-1));
+            item.style.backgroundColor = colors[randomChoice];
         }
 
         item.y += player.speed;
@@ -96,6 +99,9 @@ function endgame(){
 
 function start(){
     startScreen.classList.add("hide");
+    gameArea.innerHTML="";
+    player.score = 0;
+    player.start = true;
     gameArea.classList.remove("hide");
     score.classList.remove("hide");
     player.start = true;
@@ -121,7 +127,9 @@ function start(){
         enemy.y = ((x+1)*600)*-1;
         enemy.style.top = enemy.y + "px";
         enemy.style.left = Math.floor(Math.random() * 150) + "px";
-        enemy.style.backgroundColor = "red";
+        let colors = ["red", "green", "yellow", "purple", "grey"]
+        let randomChoice = Math.floor(Math.random() * (colors.length-1));
+        enemy.style.backgroundColor = colors[randomChoice];
         gameArea.appendChild(enemy);
     }
 }
