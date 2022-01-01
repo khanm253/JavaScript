@@ -19,18 +19,20 @@ document.addEventListener("keyup", pressOff);
 function playGame(){
     console.log("inPlay");
     let car = document.querySelector(".car");
+    let road = gameArea.getBoundingClientRect();
+    console.log(road)
     if(player.start){
 
-        if(keys.ArrowUp){
+        if(keys.ArrowUp && player.y > road.top){
             player.y -= player.speed;
         }
-        if(keys.ArrowDown){
+        if(keys.ArrowDown && player.y < (road.bottom - 50)){
             player.y += player.speed;
         }
-        if(keys.ArrowLeft){
+        if(keys.ArrowLeft && player.x > 0){
             player.x -= player.speed;
         }
-        if(keys.ArrowRight){
+        if(keys.ArrowRight && player.x < (road.width - 50)){
             player.x += player.speed;
         }
 
