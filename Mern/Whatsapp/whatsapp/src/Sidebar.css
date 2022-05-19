@@ -49,3 +49,9 @@
     outline: none;
     margin-left: 5px;
 }
+
+.sidebar-chats{
+    flex: 1;
+    background-color: white;
+    overflow: scroll;
+}
