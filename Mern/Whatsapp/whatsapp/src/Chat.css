@@ -79,6 +79,7 @@
     border: none;
     padding: 10px;
     border-radius: 30px;
+    outline: none;
 }
 
 .chat-footer > form > button{
